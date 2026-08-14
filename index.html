@@ -5,13 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Confertec Construções Lda — Estruturas de betão e aço | Portugal</title>
 
-<meta name="description" content="Confertec Construções Lda executa estruturas de betão armado, estruturas metálicas, fundações e obra civil para promotores e indústria em Portugal. Peça orçamento.">
+<meta name="description" id="metaDesc" content="Confertec Construções Lda executa estruturas de betão armado, estruturas metálicas, fundações e obra civil para promotores e indústria em Portugal. Peça orçamento.">
 <meta name="robots" content="index,follow">
 <meta name="author" content="Confertec Construções Lda">
 <link rel="canonical" href="https://www.confertec.pt/">
 
+<link rel="alternate" hreflang="pt" href="https://www.confertec.pt/?lang=pt">
+<link rel="alternate" hreflang="es" href="https://www.confertec.pt/?lang=es">
+<link rel="alternate" hreflang="en" href="https://www.confertec.pt/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://www.confertec.pt/">
+
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_PT">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
 <meta property="og:site_name" content="Confertec Construções Lda">
 <meta property="og:title" content="Confertec Construções Lda — Estruturas de betão e aço">
 <meta property="og:description" content="Estruturas de betão armado, estruturas metálicas e obra civil. Prazos cumpridos, obra limpa.">
@@ -43,7 +50,8 @@
     "postalCode": "0000-000",
     "addressCountry": "PT"
   },
-  "areaServed": "PT",
+  "areaServed": ["PT","ES"],
+  "availableLanguage": ["pt","es","en"],
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
@@ -65,7 +73,6 @@
   --betao-2:#F6F5F2;      /* betão polido */
   --aco:#6B747C;          /* aço — texto secundário */
   --amarelo:#F5B301;      /* marcação de obra — acento único */
-  --amarelo-esc:#C88F00;
   --linha:#D3D0C9;
 
   --f-display:'Archivo', system-ui, sans-serif;
@@ -92,7 +99,6 @@ button{font:inherit}
 :focus-visible{outline:3px solid var(--amarelo); outline-offset:3px}
 
 .wrap{max-width:var(--max); margin:0 auto; padding-inline:var(--gut)}
-.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 .skip{position:absolute; left:-9999px; top:0; z-index:200; background:var(--amarelo); color:var(--graf);
   padding:12px 18px; font-family:var(--f-mono); font-size:13px; font-weight:600}
@@ -110,9 +116,8 @@ p{margin:0 0 1em}
   letter-spacing:.16em; text-transform:uppercase; color:var(--aco);
   display:flex; align-items:center; gap:12px; margin:0 0 22px;
 }
-.cota::before{content:""; width:26px; height:1px; background:currentColor; flex:none; position:relative}
-.cota::after{content:""; flex:1; height:1px;
-  background:linear-gradient(90deg, var(--linha), transparent)}
+.cota::before{content:""; width:26px; height:1px; background:currentColor; flex:none}
+.cota::after{content:""; flex:1; height:1px; background:linear-gradient(90deg, var(--linha), transparent)}
 .cota--esc{color:#8D959B}
 .cota--esc::after{background:linear-gradient(90deg, var(--graf-3), transparent)}
 
@@ -141,20 +146,33 @@ p{margin:0 0 1em}
    ============================================================ */
 .hdr{position:sticky; top:0; z-index:100; background:rgba(22,24,26,.94);
   backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid var(--graf-3)}
-.hdr__in{display:flex; align-items:center; justify-content:space-between; gap:24px; height:72px}
+.hdr__in{display:flex; align-items:center; justify-content:space-between; gap:20px; height:72px}
 .logo{display:flex; align-items:center; gap:11px; text-decoration:none; color:var(--betao)}
 .logo svg{flex:none}
 .logo b{font-family:var(--f-display); font-weight:900; font-size:21px; letter-spacing:.01em; display:block; line-height:1}
 .logo span{font-family:var(--f-mono); font-size:9.5px; letter-spacing:.24em; color:#8D959B; display:block; margin-top:3px}
 
-.nav{display:flex; align-items:center; gap:30px}
+.nav{display:flex; align-items:center; gap:28px}
 .nav a{font-family:var(--f-mono); font-size:12.5px; font-weight:500; letter-spacing:.11em;
   text-transform:uppercase; color:#B9BFC4; text-decoration:none; padding:6px 0; position:relative}
 .nav a::after{content:""; position:absolute; left:0; right:0; bottom:0; height:2px; background:var(--amarelo);
   transform:scaleX(0); transform-origin:left; transition:transform .22s ease}
 .nav a:hover{color:#fff}
 .nav a:hover::after{transform:scaleX(1)}
-.hdr .btn{padding:11px 20px; font-size:13.5px}
+
+.hdr__end{display:flex; align-items:center; gap:14px}
+.hdr__end .btn{padding:11px 20px; font-size:13.5px}
+
+/* ---- seletor de idioma ---- */
+.lang{display:flex; align-items:center; border:1px solid var(--graf-3); border-radius:var(--r); overflow:hidden}
+.lang button{
+  background:transparent; border:0; cursor:pointer; padding:8px 10px;
+  font-family:var(--f-mono); font-size:11.5px; font-weight:600; letter-spacing:.1em;
+  color:#8D959B; transition:color .16s ease, background-color .16s ease;
+}
+.lang button + button{border-left:1px solid var(--graf-3)}
+.lang button:hover{color:#fff; background:rgba(255,255,255,.06)}
+.lang button[aria-pressed="true"]{background:var(--amarelo); color:var(--graf)}
 
 .burger{display:none; background:none; border:1px solid var(--graf-3); color:var(--betao);
   width:44px; height:44px; border-radius:var(--r); cursor:pointer; align-items:center; justify-content:center}
@@ -162,7 +180,7 @@ p{margin:0 0 1em}
 .burger span::before,.burger span::after{content:""; position:absolute; left:0; width:19px; height:2px; background:currentColor}
 .burger span::before{top:-6px} .burger span::after{top:6px}
 
-@media (max-width:900px){
+@media (max-width:1000px){
   .nav{position:fixed; inset:72px 0 auto 0; background:var(--graf); flex-direction:column;
     align-items:stretch; gap:0; padding:12px var(--gut) 28px; border-bottom:1px solid var(--graf-3);
     display:none}
@@ -170,7 +188,7 @@ p{margin:0 0 1em}
   .nav a{padding:15px 0; border-bottom:1px solid var(--graf-2); font-size:14px}
   .nav .btn{margin-top:18px; justify-content:center}
   .burger{display:flex}
-  .hdr__in > .btn{display:none}
+  .hdr__end .btn{display:none}
 }
 
 /* ============================================================
@@ -187,7 +205,7 @@ p{margin:0 0 1em}
   -webkit-mask-image:radial-gradient(ellipse 90% 70% at 70% 40%, #000 20%, transparent 78%);
 }
 .hero__in{position:relative; display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(32px,5vw,64px); align-items:center}
-.hero h1{font-size:clamp(38px,6.4vw,78px); font-weight:900; letter-spacing:-.035em; margin-bottom:22px}
+.hero h1{font-size:clamp(38px,6.2vw,76px); font-weight:900; letter-spacing:-.035em; margin-bottom:22px}
 .hero h1 em{font-style:normal; color:var(--amarelo)}
 .hero__cta{display:flex; flex-wrap:wrap; gap:14px; margin-top:32px}
 .hero__meta{display:flex; flex-wrap:wrap; gap:28px; margin-top:42px; padding-top:26px; border-top:1px solid var(--graf-3)}
@@ -277,7 +295,7 @@ p{margin:0 0 1em}
 .obra__cap strong{font-family:var(--f-display); font-size:17px; font-weight:700; display:block}
 .obra__cap span{font-family:var(--f-mono); font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--amarelo)}
 .obra--wide{grid-column:span 2}
-@media (max-width:800px){.obras{grid-template-columns:1fr 1fr} .obra--wide{grid-column:span 2}}
+@media (max-width:800px){.obras{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.obras{grid-template-columns:1fr} .obra--wide{grid-column:span 1}}
 
 /* sobre */
@@ -367,12 +385,12 @@ p{margin:0 0 1em}
 </head>
 
 <body>
-<a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+<a class="skip" href="#conteudo" data-i18n="skip">Saltar para o conteúdo</a>
 
 <!-- ======================= HEADER ======================= -->
 <header class="hdr">
   <div class="wrap hdr__in">
-    <a class="logo" href="#topo" aria-label="Confertec Construções, início">
+    <a class="logo" href="#topo" data-i18n-aria="logo.aria" aria-label="Confertec Construções, início">
       <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
         <rect width="34" height="34" fill="#F5B301"/>
         <path d="M6 25h22M9 25V13.5L17 8l8 5.5V25" stroke="#16181A" stroke-width="2.6" fill="none"/>
@@ -384,20 +402,28 @@ p{margin:0 0 1em}
       </span>
     </a>
 
-    <nav class="nav" id="nav" aria-label="Navegação principal">
-      <a href="#servicos">Serviços</a>
-      <a href="#processo">Como trabalhamos</a>
-      <a href="#obras">Obras</a>
-      <a href="#empresa">Empresa</a>
-      <a href="#contacto">Contacto</a>
-      <a class="btn btn--pri" href="#contacto">Pedir orçamento</a>
+    <nav class="nav" id="nav" data-i18n-aria="nav.aria" aria-label="Navegação principal">
+      <a href="#servicos" data-i18n="nav.serv">Serviços</a>
+      <a href="#processo" data-i18n="nav.proc">Como trabalhamos</a>
+      <a href="#obras" data-i18n="nav.obras">Obras</a>
+      <a href="#empresa" data-i18n="nav.emp">Empresa</a>
+      <a href="#contacto" data-i18n="nav.cont">Contacto</a>
+      <a class="btn btn--pri" href="#contacto" data-i18n="cta.orc">Pedir orçamento</a>
     </nav>
 
-    <a class="btn btn--pri" href="#contacto">Pedir orçamento</a>
+    <div class="hdr__end">
+      <div class="lang" id="lang" role="group" data-i18n-aria="lang.aria" aria-label="Idioma">
+        <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
 
-    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
-      <span></span>
-    </button>
+      <a class="btn btn--pri" href="#contacto" data-i18n="cta.orc">Pedir orçamento</a>
+
+      <button class="burger" id="burger" data-i18n-aria="menu.open" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+        <span></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -409,59 +435,51 @@ p{margin:0 0 1em}
   <div class="wrap hero__in">
 
     <div>
-      <p class="cota cota--esc">Estruturas e obra civil · Portugal</p>
-      <h1>Betão, aço e prazos<br>que se <em>cumprem</em>.</h1>
-      <p class="lead lead--esc">
+      <p class="cota cota--esc" data-i18n="hero.eyebrow">Estruturas e obra civil · Portugal</p>
+      <h1 data-i18n-html="hero.h1">Betão, aço e prazos<br>que se <em>cumprem</em>.</h1>
+      <p class="lead lead--esc" data-i18n="hero.lead">
         A Confertec executa estruturas de betão armado, estruturas metálicas e obra civil
         para promotores, indústria e agricultura. Equipas próprias, direção de obra permanente
         e um único interlocutor do primeiro traço à receção provisória.
       </p>
       <div class="hero__cta">
         <a class="btn btn--pri" href="#contacto">
-          Pedir orçamento
+          <span data-i18n="cta.orc">Pedir orçamento</span>
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="2"/></svg>
         </a>
-        <a class="btn btn--gho" href="#obras">Ver obras</a>
+        <a class="btn btn--gho" href="#obras" data-i18n="cta.obras">Ver obras</a>
       </div>
 
       <div class="hero__meta">
-        <div><b>+20</b>anos de obra</div>
-        <div><b>PT · ES</b>área de atuação</div>
-        <div><b>24 h</b>resposta a pedidos</div>
+        <div><b data-i18n="hero.m1v">+20</b><span data-i18n="hero.m1">anos de obra</span></div>
+        <div><b data-i18n="hero.m2v">PT · ES</b><span data-i18n="hero.m2">área de atuação</span></div>
+        <div><b data-i18n="hero.m3v">24 h</b><span data-i18n="hero.m3">resposta a pedidos</span></div>
       </div>
     </div>
 
     <div class="hero__art">
       <!-- Assinatura: o pórtico estrutural desenha-se ao carregar a página -->
-      <svg class="portico" viewBox="0 0 520 400" role="img" aria-label="Desenho técnico de um pórtico estrutural com cotas">
-        <!-- terreno -->
+      <svg class="portico" viewBox="0 0 520 400" role="img" data-i18n-aria="portico.aria" aria-label="Desenho técnico de um pórtico estrutural com cotas">
         <path class="thin draw" style="--len:520" d="M20 330h480"/>
         <path class="thin" d="M40 330l-12 12M80 330l-12 12M120 330l-12 12M160 330l-12 12M200 330l-12 12M240 330l-12 12M280 330l-12 12M320 330l-12 12M360 330l-12 12M400 330l-12 12M440 330l-12 12M480 330l-12 12" opacity=".55"/>
-
-        <!-- pórtico -->
         <path class="steel draw d2" style="--len:900" d="M90 330V150l170-70 170 70v180"/>
-        <!-- travamento / madres -->
         <path class="thin draw d3" style="--len:700" d="M90 150h340M90 200h340M260 80v250M175 115v215M345 115v215"/>
-        <!-- chapas de base -->
         <rect class="plate fadein" x="72" y="326" width="36" height="8"/>
         <rect class="plate fadein" x="412" y="326" width="36" height="8"/>
-
-        <!-- cota do vão -->
         <g class="fadein">
           <path class="dim" d="M90 370h340"/>
           <path class="tick" d="M90 364v12M430 364v12"/>
           <rect x="222" y="358" width="76" height="24" fill="#16181A"/>
           <text x="260" y="375" text-anchor="middle">24.000</text>
         </g>
-        <!-- cota da altura -->
         <g class="fadein">
           <path class="dim" d="M472 150v180"/>
           <path class="tick" d="M466 150h12M466 330h12"/>
           <rect x="452" y="228" width="44" height="24" fill="#16181A"/>
           <text x="474" y="245" text-anchor="middle">8.500</text>
         </g>
-        <text class="gray" x="20" y="30">PÓRTICO TIPO — S275JR</text>
-        <text class="gray" x="20" y="50">ESC. 1:100</text>
+        <text class="gray" x="20" y="30" data-i18n="portico.l1">PÓRTICO TIPO — S275JR</text>
+        <text class="gray" x="20" y="50" data-i18n="portico.l2">ESC. 1:100</text>
       </svg>
     </div>
 
@@ -470,10 +488,10 @@ p{margin:0 0 1em}
 
 <div class="faixa">
   <div class="wrap faixa__in">
-    <span>Alvará de construção</span>
-    <span>Seguro de obra e responsabilidade civil</span>
-    <span>Equipas próprias, sem subempreitada oculta</span>
-    <span>Plano de segurança em todas as frentes</span>
+    <span data-i18n="fx.1">Alvará de construção</span>
+    <span data-i18n="fx.2">Seguro de obra e responsabilidade civil</span>
+    <span data-i18n="fx.3">Equipas próprias, sem subempreitada oculta</span>
+    <span data-i18n="fx.4">Plano de segurança em todas as frentes</span>
   </div>
 </div>
 
@@ -481,9 +499,9 @@ p{margin:0 0 1em}
 <section class="sec sec--claro" id="servicos">
   <div class="wrap">
     <div class="sec__head rv">
-      <p class="cota">O que executamos</p>
-      <h2>Da fundação à cobertura,<br>com a mesma equipa.</h2>
-      <p class="lead" style="margin-top:18px">
+      <p class="cota" data-i18n="serv.eyebrow">O que executamos</p>
+      <h2 data-i18n-html="serv.h2">Da fundação à cobertura,<br>com a mesma equipa.</h2>
+      <p class="lead" style="margin-top:18px" data-i18n="serv.lead">
         Trabalhamos por empreitada completa ou por especialidade. Em qualquer dos casos,
         entra em obra quem assinou o orçamento.
       </p>
@@ -494,48 +512,48 @@ p{margin:0 0 1em}
         <svg class="svc__ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M4 34h32M8 34V16h24v18M8 24h24M16 16V8h8v8"/>
         </svg>
-        <h3>Estruturas de betão armado</h3>
-        <p>Sapatas, muros de suporte, pilares, vigas e lajes. Cofragem, armadura e betonagem com controlo de ensaios e mapa de betonagens.</p>
+        <h3 data-i18n="s1.t">Estruturas de betão armado</h3>
+        <p data-i18n="s1.d">Sapatas, muros de suporte, pilares, vigas e lajes. Cofragem, armadura e betonagem com controlo de ensaios e mapa de betonagens.</p>
       </article>
 
       <article class="svc">
         <svg class="svc__ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M4 32h32M8 32V14l12-8 12 8v18M8 20h24M20 6v26"/>
         </svg>
-        <h3>Estruturas metálicas</h3>
-        <p>Pórticos, madres, coberturas e mezaninos. Fabrico, transporte e montagem com aço certificado e execução conforme EN 1090.</p>
+        <h3 data-i18n="s2.t">Estruturas metálicas</h3>
+        <p data-i18n="s2.d">Pórticos, madres, coberturas e mezaninos. Fabrico, transporte e montagem com aço certificado e execução conforme EN 1090.</p>
       </article>
 
       <article class="svc">
         <svg class="svc__ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M6 6h28v28H6zM6 15h28M6 25h28M15 6v28M25 6v28"/>
         </svg>
-        <h3>Cofragem e escoramento</h3>
-        <p>Sistemas modulares de cofragem para pilar, parede e laje, com escoramento dimensionado e plano de descofragem por fase.</p>
+        <h3 data-i18n="s3.t">Cofragem e escoramento</h3>
+        <p data-i18n="s3.d">Sistemas modulares de cofragem para pilar, parede e laje, com escoramento dimensionado e plano de descofragem por fase.</p>
       </article>
 
       <article class="svc">
         <svg class="svc__ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M4 30h32M4 30l8-12h16l8 12M14 18V8h12v10M20 30v-6"/>
         </svg>
-        <h3>Movimentação de terras e fundações</h3>
-        <p>Escavação, aterro compactado, ensoleiramentos e fundações diretas ou indiretas, coordenadas com o estudo geotécnico.</p>
+        <h3 data-i18n="s4.t">Movimentação de terras e fundações</h3>
+        <p data-i18n="s4.d">Escavação, aterro compactado, ensoleiramentos e fundações diretas ou indiretas, coordenadas com o estudo geotécnico.</p>
       </article>
 
       <article class="svc">
         <svg class="svc__ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M8 34V10l14-4v28M22 34V18h10v16M4 34h32M12 14h4M12 20h4M12 26h4"/>
         </svg>
-        <h3>Reabilitação e reforço estrutural</h3>
-        <p>Diagnóstico, tratamento de betão degradado, reforço com fibra de carbono ou perfis metálicos e recuperação de fachadas.</p>
+        <h3 data-i18n="s5.t">Reabilitação e reforço estrutural</h3>
+        <p data-i18n="s5.d">Diagnóstico, tratamento de betão degradado, reforço com fibra de carbono ou perfis metálicos e recuperação de fachadas.</p>
       </article>
 
       <article class="svc">
         <svg class="svc__ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M20 4l14 8v16l-14 8-14-8V12zM20 20l14-8M20 20v16M20 20L6 12"/>
         </svg>
-        <h3>Empreitada geral chave-na-mão</h3>
-        <p>Coordenação de todas as especialidades, licenciamento, prazos e custo fechado. Um contrato, um responsável, um cronograma.</p>
+        <h3 data-i18n="s6.t">Empreitada geral chave-na-mão</h3>
+        <p data-i18n="s6.d">Coordenação de todas as especialidades, licenciamento, prazos e custo fechado. Um contrato, um responsável, um cronograma.</p>
       </article>
     </div>
   </div>
@@ -545,14 +563,14 @@ p{margin:0 0 1em}
 <section class="sec sec--esc">
   <div class="wrap">
     <div class="sec__head rv" style="margin-bottom:44px">
-      <p class="cota cota--esc">Obra feita</p>
-      <h2 style="color:var(--betao)">Os números que<br>ficam de pé.</h2>
+      <p class="cota cota--esc" data-i18n="nums.eyebrow">Obra feita</p>
+      <h2 style="color:var(--betao)" data-i18n-html="nums.h2">Os números que<br>ficam de pé.</h2>
     </div>
     <div class="nums rv">
-      <div class="num"><b data-count="20" data-suf="+">0</b><span>Anos de atividade</span></div>
-      <div class="num"><b data-count="180" data-suf="">0</b><span>Obras entregues</span></div>
-      <div class="num"><b data-count="240" data-suf="k m²">0</b><span>Área construída</span></div>
-      <div class="num"><b data-count="98" data-suf="%">0</b><span>Entregues no prazo</span></div>
+      <div class="num"><b data-count="20" data-suf="+">0</b><span data-i18n="n1">Anos de atividade</span></div>
+      <div class="num"><b data-count="180" data-suf="">0</b><span data-i18n="n2">Obras entregues</span></div>
+      <div class="num"><b data-count="240" data-suf="k m²">0</b><span data-i18n="n3">Área construída</span></div>
+      <div class="num"><b data-count="98" data-suf="%">0</b><span data-i18n="n4">Entregues no prazo</span></div>
     </div>
   </div>
 </section>
@@ -561,30 +579,30 @@ p{margin:0 0 1em}
 <section class="sec" id="processo">
   <div class="wrap">
     <div class="sec__head rv">
-      <p class="cota">Como trabalhamos</p>
-      <h2>Quatro fases. Sem surpresas<br>a meio do caminho.</h2>
+      <p class="cota" data-i18n="proc.eyebrow">Como trabalhamos</p>
+      <h2 data-i18n-html="proc.h2">Quatro fases. Sem surpresas<br>a meio do caminho.</h2>
     </div>
 
     <div class="proc rv">
       <div class="proc__step">
-        <em>Fase 01</em>
-        <h3>Visita e levantamento</h3>
-        <p>Vamos ao local, medimos, analisamos o projeto e identificamos os condicionalismos antes de dar preço.</p>
+        <em data-i18n="p1.f">Fase 01</em>
+        <h3 data-i18n="p1.t">Visita e levantamento</h3>
+        <p data-i18n="p1.d">Vamos ao local, medimos, analisamos o projeto e identificamos os condicionalismos antes de dar preço.</p>
       </div>
       <div class="proc__step">
-        <em>Fase 02</em>
-        <h3>Orçamento e planeamento</h3>
-        <p>Mapa de quantidades detalhado, preço fechado por capítulo e cronograma com datas de início e de entrega.</p>
+        <em data-i18n="p2.f">Fase 02</em>
+        <h3 data-i18n="p2.t">Orçamento e planeamento</h3>
+        <p data-i18n="p2.d">Mapa de quantidades detalhado, preço fechado por capítulo e cronograma com datas de início e de entrega.</p>
       </div>
       <div class="proc__step">
-        <em>Fase 03</em>
-        <h3>Execução em obra</h3>
-        <p>Direção de obra permanente, relatório de progresso semanal com fotografias e controlo de segurança diário.</p>
+        <em data-i18n="p3.f">Fase 03</em>
+        <h3 data-i18n="p3.t">Execução em obra</h3>
+        <p data-i18n="p3.d">Direção de obra permanente, relatório de progresso semanal com fotografias e controlo de segurança diário.</p>
       </div>
       <div class="proc__step">
-        <em>Fase 04</em>
-        <h3>Entrega e garantia</h3>
-        <p>Auto de receção, telas finais, ensaios e garantia da estrutura. Continuamos contactáveis depois de sair do estaleiro.</p>
+        <em data-i18n="p4.f">Fase 04</em>
+        <h3 data-i18n="p4.t">Entrega e garantia</h3>
+        <p data-i18n="p4.d">Auto de receção, telas finais, ensaios e garantia da estrutura. Continuamos contactáveis depois de sair do estaleiro.</p>
       </div>
     </div>
   </div>
@@ -594,33 +612,33 @@ p{margin:0 0 1em}
 <section class="sec sec--claro" id="obras">
   <div class="wrap">
     <div class="sec__head rv">
-      <p class="cota">Portefólio</p>
-      <h2>Obras recentes.</h2>
-      <p class="lead" style="margin-top:18px">Uma seleção de trabalhos concluídos. Podemos enviar referências completas com contactos de dono de obra.</p>
+      <p class="cota" data-i18n="obras.eyebrow">Portefólio</p>
+      <h2 data-i18n="obras.h2">Obras recentes.</h2>
+      <p class="lead" style="margin-top:18px" data-i18n="obras.lead">Uma seleção de trabalhos concluídos. Podemos enviar referências completas com contactos de dono de obra.</p>
     </div>
 
     <!-- Para publicar: substituir <div class="obra__ph"> por
-         <img src="assets/obras/nome.jpg" alt="Descrição da obra" loading="lazy" width="1200" height="900"> -->
+         <img src="assets/obras/nome.jpg" alt="…" loading="lazy" width="1200" height="900"> -->
     <div class="obras rv">
       <article class="obra obra--wide">
         <div class="obra__ph" aria-hidden="true"></div>
-        <div class="obra__cap"><span>Indústria</span><strong>Pavilhão industrial de 4.200 m²</strong></div>
+        <div class="obra__cap"><span data-i18n="o1.tag">Indústria</span><strong data-i18n="o1.t">Pavilhão industrial de 4.200 m²</strong></div>
       </article>
       <article class="obra">
         <div class="obra__ph" aria-hidden="true"></div>
-        <div class="obra__cap"><span>Habitação</span><strong>Estrutura de 18 fogos</strong></div>
+        <div class="obra__cap"><span data-i18n="o2.tag">Habitação</span><strong data-i18n="o2.t">Estrutura de 18 fogos</strong></div>
       </article>
       <article class="obra">
         <div class="obra__ph" aria-hidden="true"></div>
-        <div class="obra__cap"><span>Agrícola</span><strong>Armazém e silos</strong></div>
+        <div class="obra__cap"><span data-i18n="o3.tag">Agrícola</span><strong data-i18n="o3.t">Armazém e silos</strong></div>
       </article>
       <article class="obra">
         <div class="obra__ph" aria-hidden="true"></div>
-        <div class="obra__cap"><span>Reabilitação</span><strong>Reforço estrutural em edifício histórico</strong></div>
+        <div class="obra__cap"><span data-i18n="o4.tag">Reabilitação</span><strong data-i18n="o4.t">Reforço estrutural em edifício histórico</strong></div>
       </article>
       <article class="obra">
         <div class="obra__ph" aria-hidden="true"></div>
-        <div class="obra__cap"><span>Logística</span><strong>Plataforma de cais e pavimentos</strong></div>
+        <div class="obra__cap"><span data-i18n="o5.tag">Logística</span><strong data-i18n="o5.t">Plataforma de cais e pavimentos</strong></div>
       </article>
     </div>
   </div>
@@ -630,27 +648,27 @@ p{margin:0 0 1em}
 <section class="sec" id="empresa">
   <div class="wrap sobre">
     <div class="rv">
-      <p class="cota">A empresa</p>
-      <h2>Uma construtora que<br>atende ao telefone.</h2>
-      <p class="lead" style="margin-top:20px">
+      <p class="cota" data-i18n="emp.eyebrow">A empresa</p>
+      <h2 data-i18n-html="emp.h2">Uma construtora que<br>atende ao telefone.</h2>
+      <p class="lead" style="margin-top:20px" data-i18n="emp.p1">
         A Confertec Construções Lda nasceu de equipas de obra, não de gabinetes comerciais.
         Isso decide como trabalhamos: orçamentos que resistem à realidade do estaleiro,
         prazos calculados com margem real e um encarregado que conhece o projeto de cor.
       </p>
-      <p>
+      <p data-i18n="emp.p2">
         Operamos em todo o território nacional e em projetos transfronteiriços com Espanha,
         em obra industrial, agrícola, habitacional e de reabilitação.
       </p>
-      <a class="btn btn--dark" href="#contacto" style="margin-top:12px">Falar com a equipa</a>
+      <a class="btn btn--dark" href="#contacto" style="margin-top:12px" data-i18n="emp.cta">Falar com a equipa</a>
     </div>
 
     <div class="rv">
       <ul class="lista">
-        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M2 9l5 5 9-11"/></svg><span><strong>Preço fechado por capítulo.</strong> Sabe o que paga antes de a primeira máquina entrar.</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M2 9l5 5 9-11"/></svg><span><strong>Relatório semanal com fotografias.</strong> Acompanha a obra mesmo sem lá estar.</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M2 9l5 5 9-11"/></svg><span><strong>Equipas próprias.</strong> Cofragem, ferro e montagem metálica em casa.</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M2 9l5 5 9-11"/></svg><span><strong>Segurança a sério.</strong> Plano de segurança e saúde ativo em todas as frentes.</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M2 9l5 5 9-11"/></svg><span><strong>Estaleiro limpo.</strong> Gestão de resíduos e entrega do local em condições.</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M2 9l5 5 9-11"/></svg><span data-i18n-html="l1"><strong>Preço fechado por capítulo.</strong> Sabe o que paga antes de a primeira máquina entrar.</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M2 9l5 5 9-11"/></svg><span data-i18n-html="l2"><strong>Relatório semanal com fotografias.</strong> Acompanha a obra mesmo sem lá estar.</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M2 9l5 5 9-11"/></svg><span data-i18n-html="l3"><strong>Equipas próprias.</strong> Cofragem, ferro e montagem metálica em casa.</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M2 9l5 5 9-11"/></svg><span data-i18n-html="l4"><strong>Segurança a sério.</strong> Plano de segurança e saúde ativo em todas as frentes.</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M2 9l5 5 9-11"/></svg><span data-i18n-html="l5"><strong>Estaleiro limpo.</strong> Gestão de resíduos e entrega do local em condições.</span></li>
       </ul>
     </div>
   </div>
@@ -660,9 +678,9 @@ p{margin:0 0 1em}
 <section class="sec sec--esc" id="contacto">
   <div class="wrap">
     <div class="sec__head rv">
-      <p class="cota cota--esc">Contacto</p>
-      <h2 style="color:var(--betao)">Diga-nos o que quer construir.</h2>
-      <p class="lead lead--esc" style="margin-top:18px">
+      <p class="cota cota--esc" data-i18n="cont.eyebrow">Contacto</p>
+      <h2 style="color:var(--betao)" data-i18n="cont.h2">Diga-nos o que quer construir.</h2>
+      <p class="lead lead--esc" style="margin-top:18px" data-i18n="cont.lead">
         Respondemos a todos os pedidos em 24 horas úteis. Se tiver projeto ou mapa de quantidades,
         indique-o na mensagem e enviamos-lhe as instruções para o partilhar.
       </p>
@@ -671,20 +689,20 @@ p{margin:0 0 1em}
     <div class="cont">
       <div class="info rv">
         <div class="info__it">
-          <strong>Telefone</strong>
+          <strong data-i18n="i.tel">Telefone</strong>
           <a href="tel:+351000000000">+351 000 000 000</a>
-          <p class="small">Segunda a sexta, 08:30 – 18:00</p>
+          <p class="small" data-i18n="i.horas">Segunda a sexta, 08:30 – 18:00</p>
         </div>
         <div class="info__it">
-          <strong>Email</strong>
+          <strong data-i18n="i.email">Email</strong>
           <a href="mailto:geral@confertec.pt">geral@confertec.pt</a>
         </div>
         <div class="info__it">
           <strong>WhatsApp</strong>
-          <a href="https://wa.me/351000000000" target="_blank" rel="noopener">Enviar mensagem direta</a>
+          <a href="https://wa.me/351000000000" target="_blank" rel="noopener" data-i18n="i.wa">Enviar mensagem direta</a>
         </div>
         <div class="info__it">
-          <strong>Sede</strong>
+          <strong data-i18n="i.sede">Sede</strong>
           <p>Rua Exemplo, 000<br>0000-000 Localidade, Portugal</p>
           <p class="small">NIPC 000 000 000</p>
         </div>
@@ -693,61 +711,61 @@ p{margin:0 0 1em}
       <form class="form rv" id="form" novalidate>
         <!-- ==========================================================
              ENDPOINT DO FORMULÁRIO
-             Substituir ACCESS_KEY pela chave gratuita de web3forms.com
-             (ver instruções no ficheiro LEIA-ME / README)
+             Substituir pela access key gratuita de web3forms.com
              ========================================================== -->
         <input type="hidden" name="access_key" value="COLOCAR_AQUI_A_ACCESS_KEY">
         <input type="hidden" name="subject" value="Novo pedido de orçamento — confertec.pt">
         <input type="hidden" name="from_name" value="Website Confertec">
+        <input type="hidden" name="idioma" id="campoIdioma" value="pt">
         <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
 
         <div class="form__msg" id="msg" role="status" aria-live="polite"></div>
 
         <div class="form__row">
-          <label class="fld"><span>Nome <i>*</i></span>
-            <input type="text" name="nome" required autocomplete="name" placeholder="O seu nome">
+          <label class="fld"><span data-i18n-html="f.nome">Nome <i>*</i></span>
+            <input type="text" name="nome" required autocomplete="name" data-i18n-ph="f.nome.ph" placeholder="O seu nome">
           </label>
-          <label class="fld"><span>Empresa</span>
-            <input type="text" name="empresa" autocomplete="organization" placeholder="Opcional">
+          <label class="fld"><span data-i18n="f.empresa">Empresa</span>
+            <input type="text" name="empresa" autocomplete="organization" data-i18n-ph="f.opcional" placeholder="Opcional">
           </label>
         </div>
 
         <div class="form__row">
-          <label class="fld"><span>Email <i>*</i></span>
+          <label class="fld"><span data-i18n-html="f.email">Email <i>*</i></span>
             <input type="email" name="email" required autocomplete="email" placeholder="nome@empresa.pt">
           </label>
-          <label class="fld"><span>Telefone <i>*</i></span>
+          <label class="fld"><span data-i18n-html="f.tel">Telefone <i>*</i></span>
             <input type="tel" name="telefone" required autocomplete="tel" placeholder="+351 …">
           </label>
         </div>
 
         <div class="form__row">
-          <label class="fld"><span>Tipo de obra</span>
+          <label class="fld"><span data-i18n="f.tipo">Tipo de obra</span>
             <select name="tipo_obra">
-              <option>Estrutura de betão armado</option>
-              <option>Estrutura metálica</option>
-              <option>Fundações e movimentação de terras</option>
-              <option>Reabilitação ou reforço estrutural</option>
-              <option>Empreitada geral chave-na-mão</option>
-              <option>Outro / ainda a definir</option>
+              <option data-i18n="f.t1">Estrutura de betão armado</option>
+              <option data-i18n="f.t2">Estrutura metálica</option>
+              <option data-i18n="f.t3">Fundações e movimentação de terras</option>
+              <option data-i18n="f.t4">Reabilitação ou reforço estrutural</option>
+              <option data-i18n="f.t5">Empreitada geral chave-na-mão</option>
+              <option data-i18n="f.t6">Outro / ainda a definir</option>
             </select>
           </label>
-          <label class="fld"><span>Localização da obra</span>
-            <input type="text" name="local" placeholder="Concelho ou distrito">
+          <label class="fld"><span data-i18n="f.local">Localização da obra</span>
+            <input type="text" name="local" data-i18n-ph="f.local.ph" placeholder="Concelho ou distrito">
           </label>
         </div>
 
-        <label class="fld"><span>Mensagem <i>*</i></span>
-          <textarea name="mensagem" required placeholder="Descreva a obra: área aproximada, prazo pretendido, se já tem projeto…"></textarea>
+        <label class="fld"><span data-i18n-html="f.msg">Mensagem <i>*</i></span>
+          <textarea name="mensagem" required data-i18n-ph="f.msg.ph" placeholder="Descreva a obra: área aproximada, prazo pretendido, se já tem projeto…"></textarea>
         </label>
 
         <label class="consent">
           <input type="checkbox" name="rgpd" required>
-          <span>Autorizo o tratamento dos meus dados para resposta a este pedido, nos termos da <a href="/privacidade.html">Política de Privacidade</a>.</span>
+          <span data-i18n-html="f.rgpd">Autorizo o tratamento dos meus dados para resposta a este pedido, nos termos da <a href="/privacidade.html">Política de Privacidade</a>.</span>
         </label>
 
         <button class="btn btn--pri" type="submit" id="btn">
-          Enviar pedido
+          <span id="btnTxt" data-i18n="f.enviar">Enviar pedido</span>
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="2"/></svg>
         </button>
       </form>
@@ -769,34 +787,34 @@ p{margin:0 0 1em}
           </svg>
           <span><b>CONFERTEC</b><span>CONSTRUÇÕES LDA</span></span>
         </a>
-        <p style="margin-top:16px; max-width:34ch">Estruturas de betão armado, estruturas metálicas e obra civil em Portugal.</p>
+        <p style="margin-top:16px; max-width:34ch" data-i18n="ftr.tag">Estruturas de betão armado, estruturas metálicas e obra civil em Portugal.</p>
       </div>
 
       <div>
-        <h4>Navegação</h4>
+        <h4 data-i18n="ftr.nav">Navegação</h4>
         <ul>
-          <li><a href="#servicos">Serviços</a></li>
-          <li><a href="#processo">Como trabalhamos</a></li>
-          <li><a href="#obras">Obras</a></li>
-          <li><a href="#empresa">Empresa</a></li>
-          <li><a href="#contacto">Pedir orçamento</a></li>
+          <li><a href="#servicos" data-i18n="nav.serv">Serviços</a></li>
+          <li><a href="#processo" data-i18n="nav.proc">Como trabalhamos</a></li>
+          <li><a href="#obras" data-i18n="nav.obras">Obras</a></li>
+          <li><a href="#empresa" data-i18n="nav.emp">Empresa</a></li>
+          <li><a href="#contacto" data-i18n="cta.orc">Pedir orçamento</a></li>
         </ul>
       </div>
 
       <div>
-        <h4>Contacto</h4>
+        <h4 data-i18n="nav.cont">Contacto</h4>
         <ul>
           <li><a href="tel:+351000000000">+351 000 000 000</a></li>
           <li><a href="mailto:geral@confertec.pt">geral@confertec.pt</a></li>
           <li>Rua Exemplo, 000<br>0000-000 Localidade</li>
-          <li><a href="https://www.livroreclamacoes.pt/inicio" target="_blank" rel="noopener">Livro de Reclamações</a></li>
+          <li><a href="https://www.livroreclamacoes.pt/inicio" target="_blank" rel="noopener" data-i18n="ftr.livro">Livro de Reclamações</a></li>
         </ul>
       </div>
     </div>
 
     <div class="ftr__bot">
       <span>© <span id="ano">2026</span> Confertec Construções Lda · NIPC 000 000 000</span>
-      <span><a href="/privacidade.html">Política de Privacidade</a> · <a href="/termos.html">Termos</a></span>
+      <span><a href="/privacidade.html" data-i18n="ftr.priv">Política de Privacidade</a> · <a href="/termos.html" data-i18n="ftr.termos">Termos</a></span>
     </div>
   </div>
 </footer>
@@ -804,6 +822,328 @@ p{margin:0 0 1em}
 <script>
 (function(){
   "use strict";
+
+  /* ============================================================
+     DICIONÁRIO — pt (base) · es · en
+     ============================================================ */
+  var I18N = {
+
+  pt: {
+    "html.lang":"pt-PT",
+    "doc.title":"Confertec Construções Lda — Estruturas de betão e aço | Portugal",
+    "doc.desc":"Confertec Construções Lda executa estruturas de betão armado, estruturas metálicas, fundações e obra civil para promotores e indústria em Portugal. Peça orçamento.",
+    "skip":"Saltar para o conteúdo",
+    "logo.aria":"Confertec Construções, início",
+    "nav.aria":"Navegação principal","lang.aria":"Idioma",
+    "menu.open":"Abrir menu","menu.close":"Fechar menu",
+    "nav.serv":"Serviços","nav.proc":"Como trabalhamos","nav.obras":"Obras","nav.emp":"Empresa","nav.cont":"Contacto",
+    "cta.orc":"Pedir orçamento","cta.obras":"Ver obras",
+
+    "hero.eyebrow":"Estruturas e obra civil · Portugal",
+    "hero.h1":"Betão, aço e prazos<br>que se <em>cumprem</em>.",
+    "hero.lead":"A Confertec executa estruturas de betão armado, estruturas metálicas e obra civil para promotores, indústria e agricultura. Equipas próprias, direção de obra permanente e um único interlocutor do primeiro traço à receção provisória.",
+    "hero.m1v":"+20","hero.m1":"anos de obra",
+    "hero.m2v":"PT · ES","hero.m2":"área de atuação",
+    "hero.m3v":"24 h","hero.m3":"resposta a pedidos",
+    "portico.aria":"Desenho técnico de um pórtico estrutural com cotas",
+    "portico.l1":"PÓRTICO TIPO — S275JR","portico.l2":"ESC. 1:100",
+
+    "fx.1":"Alvará de construção","fx.2":"Seguro de obra e responsabilidade civil",
+    "fx.3":"Equipas próprias, sem subempreitada oculta","fx.4":"Plano de segurança em todas as frentes",
+
+    "serv.eyebrow":"O que executamos",
+    "serv.h2":"Da fundação à cobertura,<br>com a mesma equipa.",
+    "serv.lead":"Trabalhamos por empreitada completa ou por especialidade. Em qualquer dos casos, entra em obra quem assinou o orçamento.",
+    "s1.t":"Estruturas de betão armado","s1.d":"Sapatas, muros de suporte, pilares, vigas e lajes. Cofragem, armadura e betonagem com controlo de ensaios e mapa de betonagens.",
+    "s2.t":"Estruturas metálicas","s2.d":"Pórticos, madres, coberturas e mezaninos. Fabrico, transporte e montagem com aço certificado e execução conforme EN 1090.",
+    "s3.t":"Cofragem e escoramento","s3.d":"Sistemas modulares de cofragem para pilar, parede e laje, com escoramento dimensionado e plano de descofragem por fase.",
+    "s4.t":"Movimentação de terras e fundações","s4.d":"Escavação, aterro compactado, ensoleiramentos e fundações diretas ou indiretas, coordenadas com o estudo geotécnico.",
+    "s5.t":"Reabilitação e reforço estrutural","s5.d":"Diagnóstico, tratamento de betão degradado, reforço com fibra de carbono ou perfis metálicos e recuperação de fachadas.",
+    "s6.t":"Empreitada geral chave-na-mão","s6.d":"Coordenação de todas as especialidades, licenciamento, prazos e custo fechado. Um contrato, um responsável, um cronograma.",
+
+    "nums.eyebrow":"Obra feita","nums.h2":"Os números que<br>ficam de pé.",
+    "n1":"Anos de atividade","n2":"Obras entregues","n3":"Área construída","n4":"Entregues no prazo",
+
+    "proc.eyebrow":"Como trabalhamos","proc.h2":"Quatro fases. Sem surpresas<br>a meio do caminho.",
+    "p1.f":"Fase 01","p1.t":"Visita e levantamento","p1.d":"Vamos ao local, medimos, analisamos o projeto e identificamos os condicionalismos antes de dar preço.",
+    "p2.f":"Fase 02","p2.t":"Orçamento e planeamento","p2.d":"Mapa de quantidades detalhado, preço fechado por capítulo e cronograma com datas de início e de entrega.",
+    "p3.f":"Fase 03","p3.t":"Execução em obra","p3.d":"Direção de obra permanente, relatório de progresso semanal com fotografias e controlo de segurança diário.",
+    "p4.f":"Fase 04","p4.t":"Entrega e garantia","p4.d":"Auto de receção, telas finais, ensaios e garantia da estrutura. Continuamos contactáveis depois de sair do estaleiro.",
+
+    "obras.eyebrow":"Portefólio","obras.h2":"Obras recentes.",
+    "obras.lead":"Uma seleção de trabalhos concluídos. Podemos enviar referências completas com contactos de dono de obra.",
+    "o1.tag":"Indústria","o1.t":"Pavilhão industrial de 4.200 m²",
+    "o2.tag":"Habitação","o2.t":"Estrutura de 18 fogos",
+    "o3.tag":"Agrícola","o3.t":"Armazém e silos",
+    "o4.tag":"Reabilitação","o4.t":"Reforço estrutural em edifício histórico",
+    "o5.tag":"Logística","o5.t":"Plataforma de cais e pavimentos",
+
+    "emp.eyebrow":"A empresa","emp.h2":"Uma construtora que<br>atende ao telefone.",
+    "emp.p1":"A Confertec Construções Lda nasceu de equipas de obra, não de gabinetes comerciais. Isso decide como trabalhamos: orçamentos que resistem à realidade do estaleiro, prazos calculados com margem real e um encarregado que conhece o projeto de cor.",
+    "emp.p2":"Operamos em todo o território nacional e em projetos transfronteiriços com Espanha, em obra industrial, agrícola, habitacional e de reabilitação.",
+    "emp.cta":"Falar com a equipa",
+    "l1":"<strong>Preço fechado por capítulo.</strong> Sabe o que paga antes de a primeira máquina entrar.",
+    "l2":"<strong>Relatório semanal com fotografias.</strong> Acompanha a obra mesmo sem lá estar.",
+    "l3":"<strong>Equipas próprias.</strong> Cofragem, ferro e montagem metálica em casa.",
+    "l4":"<strong>Segurança a sério.</strong> Plano de segurança e saúde ativo em todas as frentes.",
+    "l5":"<strong>Estaleiro limpo.</strong> Gestão de resíduos e entrega do local em condições.",
+
+    "cont.eyebrow":"Contacto","cont.h2":"Diga-nos o que quer construir.",
+    "cont.lead":"Respondemos a todos os pedidos em 24 horas úteis. Se tiver projeto ou mapa de quantidades, indique-o na mensagem e enviamos-lhe as instruções para o partilhar.",
+    "i.tel":"Telefone","i.horas":"Segunda a sexta, 08:30 – 18:00","i.email":"Email","i.wa":"Enviar mensagem direta","i.sede":"Sede",
+
+    "f.nome":"Nome <i>*</i>","f.nome.ph":"O seu nome","f.empresa":"Empresa","f.opcional":"Opcional",
+    "f.email":"Email <i>*</i>","f.tel":"Telefone <i>*</i>",
+    "f.tipo":"Tipo de obra",
+    "f.t1":"Estrutura de betão armado","f.t2":"Estrutura metálica","f.t3":"Fundações e movimentação de terras",
+    "f.t4":"Reabilitação ou reforço estrutural","f.t5":"Empreitada geral chave-na-mão","f.t6":"Outro / ainda a definir",
+    "f.local":"Localização da obra","f.local.ph":"Concelho ou distrito",
+    "f.msg":"Mensagem <i>*</i>","f.msg.ph":"Descreva a obra: área aproximada, prazo pretendido, se já tem projeto…",
+    "f.rgpd":"Autorizo o tratamento dos meus dados para resposta a este pedido, nos termos da <a href=\"/privacidade.html\">Política de Privacidade</a>.",
+    "f.enviar":"Enviar pedido","f.enviando":"A enviar…",
+    "f.err.campos":"Faltam campos obrigatórios. Preencha nome, email, telefone, mensagem e a autorização de dados.",
+    "f.ok":"Pedido enviado. Respondemos em 24 horas úteis. Se for urgente, ligue para +351 000 000 000.",
+    "f.err.envio":"O envio falhou. Escreva-nos para geral@confertec.pt ou ligue para +351 000 000 000.",
+    "f.err.rede":"Sem ligação ao servidor. Escreva-nos para geral@confertec.pt ou ligue para +351 000 000 000.",
+
+    "ftr.tag":"Estruturas de betão armado, estruturas metálicas e obra civil em Portugal.",
+    "ftr.nav":"Navegação","ftr.livro":"Livro de Reclamações","ftr.priv":"Política de Privacidade","ftr.termos":"Termos"
+  },
+
+  es: {
+    "html.lang":"es-ES",
+    "doc.title":"Confertec Construções Lda — Estructuras de hormigón y acero | Portugal",
+    "doc.desc":"Confertec Construções Lda ejecuta estructuras de hormigón armado, estructuras metálicas, cimentaciones y obra civil para promotores e industria. Pida presupuesto.",
+    "skip":"Saltar al contenido",
+    "logo.aria":"Confertec Construções, inicio",
+    "nav.aria":"Navegación principal","lang.aria":"Idioma",
+    "menu.open":"Abrir menú","menu.close":"Cerrar menú",
+    "nav.serv":"Servicios","nav.proc":"Cómo trabajamos","nav.obras":"Obras","nav.emp":"Empresa","nav.cont":"Contacto",
+    "cta.orc":"Pedir presupuesto","cta.obras":"Ver obras",
+
+    "hero.eyebrow":"Estructuras y obra civil · Portugal",
+    "hero.h1":"Hormigón, acero y plazos<br>que se <em>cumplen</em>.",
+    "hero.lead":"Confertec ejecuta estructuras de hormigón armado, estructuras metálicas y obra civil para promotores, industria y agricultura. Equipos propios, jefe de obra permanente y un único interlocutor desde el primer trazo hasta la recepción provisional.",
+    "hero.m1v":"+20","hero.m1":"años de obra",
+    "hero.m2v":"PT · ES","hero.m2":"ámbito de actuación",
+    "hero.m3v":"24 h","hero.m3":"respuesta a solicitudes",
+    "portico.aria":"Dibujo técnico de un pórtico estructural acotado",
+    "portico.l1":"PÓRTICO TIPO — S275JR","portico.l2":"ESC. 1:100",
+
+    "fx.1":"Licencia de construcción","fx.2":"Seguro de obra y responsabilidad civil",
+    "fx.3":"Equipos propios, sin subcontrata oculta","fx.4":"Plan de seguridad en todos los tajos",
+
+    "serv.eyebrow":"Qué ejecutamos",
+    "serv.h2":"De la cimentación a la cubierta,<br>con el mismo equipo.",
+    "serv.lead":"Trabajamos por contrata completa o por especialidad. En cualquier caso, entra en obra quien firmó el presupuesto.",
+    "s1.t":"Estructuras de hormigón armado","s1.d":"Zapatas, muros de contención, pilares, vigas y losas. Encofrado, armado y hormigonado con control de ensayos y plan de hormigonado.",
+    "s2.t":"Estructuras metálicas","s2.d":"Pórticos, correas, cubiertas y altillos. Fabricación, transporte y montaje con acero certificado y ejecución conforme a EN 1090.",
+    "s3.t":"Encofrado y apuntalamiento","s3.d":"Sistemas modulares de encofrado para pilar, muro y losa, con apuntalamiento dimensionado y plan de desencofrado por fases.",
+    "s4.t":"Movimiento de tierras y cimentaciones","s4.d":"Excavación, relleno compactado, losas de cimentación y cimentaciones directas o profundas, coordinadas con el estudio geotécnico.",
+    "s5.t":"Rehabilitación y refuerzo estructural","s5.d":"Diagnóstico, tratamiento de hormigón degradado, refuerzo con fibra de carbono o perfiles metálicos y recuperación de fachadas.",
+    "s6.t":"Contrata general llave en mano","s6.d":"Coordinación de todas las especialidades, licencias, plazos y coste cerrado. Un contrato, un responsable, un cronograma.",
+
+    "nums.eyebrow":"Obra hecha","nums.h2":"Los números que<br>se quedan en pie.",
+    "n1":"Años de actividad","n2":"Obras entregadas","n3":"Superficie construida","n4":"Entregadas en plazo",
+
+    "proc.eyebrow":"Cómo trabajamos","proc.h2":"Cuatro fases. Sin sorpresas<br>a mitad de camino.",
+    "p1.f":"Fase 01","p1.t":"Visita y levantamiento","p1.d":"Vamos al sitio, medimos, analizamos el proyecto e identificamos los condicionantes antes de dar precio.",
+    "p2.f":"Fase 02","p2.t":"Presupuesto y planificación","p2.d":"Mediciones detalladas, precio cerrado por capítulos y cronograma con fechas de inicio y de entrega.",
+    "p3.f":"Fase 03","p3.t":"Ejecución en obra","p3.d":"Jefe de obra permanente, informe de avance semanal con fotografías y control de seguridad diario.",
+    "p4.f":"Fase 04","p4.t":"Entrega y garantía","p4.d":"Acta de recepción, planos as-built, ensayos y garantía de la estructura. Seguimos localizables después de dejar la obra.",
+
+    "obras.eyebrow":"Portafolio","obras.h2":"Obras recientes.",
+    "obras.lead":"Una selección de trabajos terminados. Podemos enviar referencias completas con contactos de la propiedad.",
+    "o1.tag":"Industria","o1.t":"Nave industrial de 4.200 m²",
+    "o2.tag":"Residencial","o2.t":"Estructura de 18 viviendas",
+    "o3.tag":"Agrícola","o3.t":"Almacén y silos",
+    "o4.tag":"Rehabilitación","o4.t":"Refuerzo estructural en edificio histórico",
+    "o5.tag":"Logística","o5.t":"Plataforma de muelles y pavimentos",
+
+    "emp.eyebrow":"La empresa","emp.h2":"Una constructora que<br>coge el teléfono.",
+    "emp.p1":"Confertec Construções Lda nació de equipos de obra, no de despachos comerciales. Eso decide cómo trabajamos: presupuestos que aguantan la realidad del tajo, plazos calculados con margen real y un encargado que se sabe el proyecto de memoria.",
+    "emp.p2":"Operamos en todo Portugal y en proyectos transfronterizos con España, en obra industrial, agrícola, residencial y de rehabilitación.",
+    "emp.cta":"Hablar con el equipo",
+    "l1":"<strong>Precio cerrado por capítulos.</strong> Sabe lo que paga antes de que entre la primera máquina.",
+    "l2":"<strong>Informe semanal con fotografías.</strong> Sigue la obra sin tener que estar allí.",
+    "l3":"<strong>Equipos propios.</strong> Encofrado, ferralla y montaje metálico en casa.",
+    "l4":"<strong>Seguridad en serio.</strong> Plan de seguridad y salud activo en todos los tajos.",
+    "l5":"<strong>Obra limpia.</strong> Gestión de residuos y entrega del sitio en condiciones.",
+
+    "cont.eyebrow":"Contacto","cont.h2":"Cuéntenos qué quiere construir.",
+    "cont.lead":"Respondemos a todas las solicitudes en 24 horas laborables. Si tiene proyecto o mediciones, indíquelo en el mensaje y le enviamos las instrucciones para compartirlo.",
+    "i.tel":"Teléfono","i.horas":"Lunes a viernes, 08:30 – 18:00","i.email":"Email","i.wa":"Enviar mensaje directo","i.sede":"Sede",
+
+    "f.nome":"Nombre <i>*</i>","f.nome.ph":"Su nombre","f.empresa":"Empresa","f.opcional":"Opcional",
+    "f.email":"Email <i>*</i>","f.tel":"Teléfono <i>*</i>",
+    "f.tipo":"Tipo de obra",
+    "f.t1":"Estructura de hormigón armado","f.t2":"Estructura metálica","f.t3":"Cimentaciones y movimiento de tierras",
+    "f.t4":"Rehabilitación o refuerzo estructural","f.t5":"Contrata general llave en mano","f.t6":"Otro / aún por definir",
+    "f.local":"Ubicación de la obra","f.local.ph":"Municipio o provincia",
+    "f.msg":"Mensaje <i>*</i>","f.msg.ph":"Describa la obra: superficie aproximada, plazo deseado, si ya tiene proyecto…",
+    "f.rgpd":"Autorizo el tratamiento de mis datos para responder a esta solicitud, según la <a href=\"/privacidade.html\">Política de Privacidad</a>.",
+    "f.enviar":"Enviar solicitud","f.enviando":"Enviando…",
+    "f.err.campos":"Faltan campos obligatorios. Rellene nombre, email, teléfono, mensaje y la autorización de datos.",
+    "f.ok":"Solicitud enviada. Respondemos en 24 horas laborables. Si es urgente, llame al +351 000 000 000.",
+    "f.err.envio":"El envío ha fallado. Escríbanos a geral@confertec.pt o llame al +351 000 000 000.",
+    "f.err.rede":"Sin conexión con el servidor. Escríbanos a geral@confertec.pt o llame al +351 000 000 000.",
+
+    "ftr.tag":"Estructuras de hormigón armado, estructuras metálicas y obra civil en Portugal.",
+    "ftr.nav":"Navegación","ftr.livro":"Libro de Reclamaciones","ftr.priv":"Política de Privacidad","ftr.termos":"Términos"
+  },
+
+  en: {
+    "html.lang":"en-GB",
+    "doc.title":"Confertec Construções Lda — Concrete and steel structures | Portugal",
+    "doc.desc":"Confertec Construções Lda builds reinforced concrete structures, steel frames, foundations and civil works for developers and industry in Portugal. Request a quote.",
+    "skip":"Skip to content",
+    "logo.aria":"Confertec Construções, home",
+    "nav.aria":"Main navigation","lang.aria":"Language",
+    "menu.open":"Open menu","menu.close":"Close menu",
+    "nav.serv":"Services","nav.proc":"How we work","nav.obras":"Projects","nav.emp":"Company","nav.cont":"Contact",
+    "cta.orc":"Request a quote","cta.obras":"See projects",
+
+    "hero.eyebrow":"Structures and civil works · Portugal",
+    "hero.h1":"Concrete, steel and deadlines<br>we actually <em>meet</em>.",
+    "hero.lead":"Confertec builds reinforced concrete structures, steel frames and civil works for developers, industry and agriculture. In-house crews, a site manager on the ground and one point of contact from first drawing to handover.",
+    "hero.m1v":"20+","hero.m1":"years on site",
+    "hero.m2v":"PT · ES","hero.m2":"where we build",
+    "hero.m3v":"24 h","hero.m3":"reply to enquiries",
+    "portico.aria":"Technical drawing of a portal frame with dimensions",
+    "portico.l1":"PORTAL FRAME — S275JR","portico.l2":"SCALE 1:100",
+
+    "fx.1":"Licensed contractor","fx.2":"Works and liability insurance",
+    "fx.3":"In-house crews, no hidden subcontracting","fx.4":"Safety plan on every work face",
+
+    "serv.eyebrow":"What we build",
+    "serv.h2":"From foundation to roof,<br>with the same crew.",
+    "serv.lead":"We take on full contracts or single trades. Either way, the people who priced the job are the people on site.",
+    "s1.t":"Reinforced concrete structures","s1.d":"Footings, retaining walls, columns, beams and slabs. Formwork, rebar and pouring with test control and a pour schedule.",
+    "s2.t":"Steel structures","s2.d":"Portal frames, purlins, roofing and mezzanines. Fabrication, transport and erection in certified steel, executed to EN 1090.",
+    "s3.t":"Formwork and shoring","s3.d":"Modular formwork systems for columns, walls and slabs, with engineered shoring and a phased striking plan.",
+    "s4.t":"Earthworks and foundations","s4.d":"Excavation, compacted fill, raft slabs and shallow or deep foundations, coordinated with the geotechnical report.",
+    "s5.t":"Refurbishment and structural strengthening","s5.d":"Survey, treatment of degraded concrete, strengthening with carbon fibre or steel sections, and façade restoration.",
+    "s6.t":"Turnkey main contracting","s6.d":"All trades coordinated, permits handled, fixed price and fixed dates. One contract, one lead, one programme.",
+
+    "nums.eyebrow":"Track record","nums.h2":"The numbers that<br>stay standing.",
+    "n1":"Years in business","n2":"Projects delivered","n3":"Area built","n4":"Delivered on time",
+
+    "proc.eyebrow":"How we work","proc.h2":"Four stages. No surprises<br>halfway through.",
+    "p1.f":"Stage 01","p1.t":"Site visit and survey","p1.d":"We come to the site, measure, review the drawings and flag the constraints before quoting a price.",
+    "p2.f":"Stage 02","p2.t":"Quote and programme","p2.d":"Detailed bill of quantities, fixed price per section and a programme with start and completion dates.",
+    "p3.f":"Stage 03","p3.t":"On-site execution","p3.d":"A site manager on the ground, a weekly progress report with photos and daily safety checks.",
+    "p4.f":"Stage 04","p4.t":"Handover and warranty","p4.d":"Completion certificate, as-built drawings, testing and a structural warranty. We stay reachable after we leave.",
+
+    "obras.eyebrow":"Portfolio","obras.h2":"Recent projects.",
+    "obras.lead":"A selection of completed work. We can send full references with client contacts on request.",
+    "o1.tag":"Industrial","o1.t":"4,200 m² industrial unit",
+    "o2.tag":"Residential","o2.t":"18-unit structural frame",
+    "o3.tag":"Agricultural","o3.t":"Warehouse and silos",
+    "o4.tag":"Refurbishment","o4.t":"Structural strengthening, heritage building",
+    "o5.tag":"Logistics","o5.t":"Loading dock platform and paving",
+
+    "emp.eyebrow":"The company","emp.h2":"A contractor that<br>answers the phone.",
+    "emp.p1":"Confertec Construções Lda grew out of site crews, not sales offices. That shapes how we work: quotes that survive contact with the site, programmes built on real margins, and a foreman who knows the drawings by heart.",
+    "emp.p2":"We work across Portugal and on cross-border projects with Spain, in industrial, agricultural, residential and refurbishment work.",
+    "emp.cta":"Talk to the team",
+    "l1":"<strong>Fixed price per section.</strong> You know the cost before the first machine arrives.",
+    "l2":"<strong>Weekly report with photos.</strong> Follow the work without being there.",
+    "l3":"<strong>In-house crews.</strong> Formwork, rebar and steel erection all our own.",
+    "l4":"<strong>Safety taken seriously.</strong> An active health and safety plan on every work face.",
+    "l5":"<strong>Clean site.</strong> Waste managed and the site handed back in order.",
+
+    "cont.eyebrow":"Contact","cont.h2":"Tell us what you want to build.",
+    "cont.lead":"We reply to every enquiry within one working day. If you have drawings or a bill of quantities, say so in your message and we will send you the details for sharing it.",
+    "i.tel":"Phone","i.horas":"Monday to Friday, 08:30 – 18:00","i.email":"Email","i.wa":"Send a direct message","i.sede":"Head office",
+
+    "f.nome":"Name <i>*</i>","f.nome.ph":"Your name","f.empresa":"Company","f.opcional":"Optional",
+    "f.email":"Email <i>*</i>","f.tel":"Phone <i>*</i>",
+    "f.tipo":"Type of work",
+    "f.t1":"Reinforced concrete structure","f.t2":"Steel structure","f.t3":"Foundations and earthworks",
+    "f.t4":"Refurbishment or strengthening","f.t5":"Turnkey main contract","f.t6":"Other / not decided yet",
+    "f.local":"Project location","f.local.ph":"Town or region",
+    "f.msg":"Message <i>*</i>","f.msg.ph":"Describe the project: approximate area, target dates, whether drawings exist…",
+    "f.rgpd":"I agree to my data being processed so that this enquiry can be answered, as set out in the <a href=\"/privacidade.html\">Privacy Policy</a>.",
+    "f.enviar":"Send enquiry","f.enviando":"Sending…",
+    "f.err.campos":"Some required fields are missing. Please fill in name, email, phone, message and the data consent.",
+    "f.ok":"Enquiry sent. We reply within one working day. If it is urgent, call +351 000 000 000.",
+    "f.err.envio":"Sending failed. Email geral@confertec.pt or call +351 000 000 000.",
+    "f.err.rede":"No connection to the server. Email geral@confertec.pt or call +351 000 000 000.",
+
+    "ftr.tag":"Reinforced concrete structures, steel frames and civil works in Portugal.",
+    "ftr.nav":"Navigation","ftr.livro":"Complaints Book","ftr.priv":"Privacy Policy","ftr.termos":"Terms"
+  }
+
+  };
+
+  /* ============================================================
+     MOTOR i18n
+     ============================================================ */
+  var IDIOMAS = ['pt','es','en'];
+  var CHAVE = 'confertec.lang';
+  var atual = 'pt';
+
+  function guardar(l){ try{ localStorage.setItem(CHAVE, l); }catch(e){} }
+  function lido(){ try{ return localStorage.getItem(CHAVE); }catch(e){ return null; } }
+
+  function detetar(){
+    var url = new URLSearchParams(location.search).get('lang');
+    if (url && IDIOMAS.indexOf(url) > -1) return url;
+    var guardado = lido();
+    if (guardado && IDIOMAS.indexOf(guardado) > -1) return guardado;
+    var nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'pt';
+    nav = nav.toLowerCase();
+    if (nav.indexOf('es') === 0) return 'es';
+    if (nav.indexOf('en') === 0) return 'en';
+    return 'pt';
+  }
+
+  function t(chave){
+    var d = I18N[atual] || I18N.pt;
+    return (chave in d) ? d[chave] : (I18N.pt[chave] || '');
+  }
+
+  function aplicar(l){
+    atual = (IDIOMAS.indexOf(l) > -1) ? l : 'pt';
+    var d = I18N[atual];
+
+    document.documentElement.lang = d['html.lang'];
+    document.title = d['doc.title'];
+    var md = document.getElementById('metaDesc');
+    if (md) md.setAttribute('content', d['doc.desc']);
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var v = d[el.dataset.i18n];
+      if (v != null) el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var v = d[el.dataset.i18nHtml];
+      if (v != null) el.innerHTML = v;
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      var v = d[el.dataset.i18nPh];
+      if (v != null) el.setAttribute('placeholder', v);
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(function(el){
+      var v = d[el.dataset.i18nAria];
+      if (v != null) el.setAttribute('aria-label', v);
+    });
+
+    // estado dos botões de idioma
+    document.querySelectorAll('#lang button').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.lang === atual));
+    });
+
+    // o menu pode estar aberto: recompor o rótulo correto
+    var aberto = nav.getAttribute('data-open') === 'true';
+    burger.setAttribute('aria-label', aberto ? d['menu.close'] : d['menu.open']);
+
+    // idioma enviado com o formulário, para a equipa saber em que língua responder
+    var campo = document.getElementById('campoIdioma');
+    if (campo) campo.value = atual;
+
+    guardar(atual);
+  }
 
   /* ---- ano no rodapé ---- */
   document.getElementById('ano').textContent = new Date().getFullYear();
@@ -815,14 +1155,27 @@ p{margin:0 0 1em}
     var open = nav.getAttribute('data-open') === 'true';
     nav.setAttribute('data-open', String(!open));
     burger.setAttribute('aria-expanded', String(!open));
-    burger.setAttribute('aria-label', open ? 'Abrir menu' : 'Fechar menu');
+    burger.setAttribute('aria-label', open ? t('menu.open') : t('menu.close'));
   });
   nav.addEventListener('click', function(e){
     if (e.target.tagName === 'A'){
       nav.setAttribute('data-open','false');
       burger.setAttribute('aria-expanded','false');
+      burger.setAttribute('aria-label', t('menu.open'));
     }
   });
+
+  /* ---- seletor de idioma ---- */
+  document.getElementById('lang').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-lang]');
+    if (!b) return;
+    aplicar(b.dataset.lang);
+    var u = new URL(location.href);
+    u.searchParams.set('lang', atual);
+    history.replaceState(null, '', u);
+  });
+
+  aplicar(detetar());
 
   var semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -846,9 +1199,9 @@ p{margin:0 0 1em}
     var suf = el.dataset.suf || '';
     if (semMovimento){ el.textContent = fim + suf; return; }
     var t0 = null, dur = 1400;
-    function passo(t){
-      if (!t0) t0 = t;
-      var p = Math.min((t - t0) / dur, 1);
+    function passo(ts){
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
       var e = 1 - Math.pow(1 - p, 3);
       el.textContent = Math.round(fim * e) + suf;
       if (p < 1) requestAnimationFrame(passo);
@@ -870,6 +1223,7 @@ p{margin:0 0 1em}
   var form = document.getElementById('form');
   var msg  = document.getElementById('msg');
   var btn  = document.getElementById('btn');
+  var btnTxt = document.getElementById('btnTxt');
 
   function mostrar(estado, texto){
     msg.dataset.state = estado;
@@ -881,14 +1235,13 @@ p{margin:0 0 1em}
     e.preventDefault();
 
     if (!form.checkValidity()){
-      mostrar('erro', 'Faltam campos obrigatórios. Preencha nome, email, telefone, mensagem e a autorização de dados.');
+      mostrar('erro', t('f.err.campos'));
       form.reportValidity();
       return;
     }
 
     btn.disabled = true;
-    var textoOriginal = btn.firstChild.nodeValue;
-    btn.firstChild.nodeValue = 'A enviar… ';
+    btnTxt.textContent = t('f.enviando');
     msg.removeAttribute('data-state');
 
     var dados = Object.fromEntries(new FormData(form).entries());
@@ -902,17 +1255,18 @@ p{margin:0 0 1em}
     .then(function(res){
       if (res.success){
         form.reset();
-        mostrar('ok', 'Pedido enviado. Respondemos em 24 horas úteis. Se for urgente, ligue para +351 000 000 000.');
+        document.getElementById('campoIdioma').value = atual;
+        mostrar('ok', t('f.ok'));
       } else {
-        mostrar('erro', 'O envio falhou. Escreva-nos para geral@confertec.pt ou ligue para +351 000 000 000.');
+        mostrar('erro', t('f.err.envio'));
       }
     })
     .catch(function(){
-      mostrar('erro', 'Sem ligação ao servidor. Escreva-nos para geral@confertec.pt ou ligue para +351 000 000 000.');
+      mostrar('erro', t('f.err.rede'));
     })
     .finally(function(){
       btn.disabled = false;
-      btn.firstChild.nodeValue = textoOriginal;
+      btnTxt.textContent = t('f.enviar');
     });
   });
 
