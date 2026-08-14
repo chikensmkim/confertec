@@ -388,6 +388,34 @@ p{margin:0 0 1em}
 @media (max-width:520px){.ftr__top{grid-template-columns:1fr}}
 
 /* ============================================================
+   BOTÃO FLUTUANTE WHATSAPP
+   Apenas um link wa.me — sem scripts de terceiros, sem cookies.
+   ============================================================ */
+.wa{
+  position:fixed; z-index:90;
+  right:clamp(16px,2.5vw,28px);
+  bottom:calc(clamp(16px,2.5vw,28px) + env(safe-area-inset-bottom, 0px));
+  display:flex; align-items:center; gap:11px;
+  height:54px; padding:0 22px 0 18px;
+  background:var(--graf); color:var(--betao);
+  border:1px solid #3E464B; border-radius:27px; text-decoration:none;
+  font-family:var(--f-display); font-weight:700; font-size:15px; line-height:1;
+  box-shadow:0 10px 30px rgba(0,0,0,.32);
+  opacity:0; visibility:hidden; transform:translateY(14px);
+  transition:opacity .28s ease, transform .28s ease, visibility .28s ease,
+             background-color .18s ease, border-color .18s ease;
+}
+.wa[data-show="true"]{opacity:1; visibility:visible; transform:none}
+.wa:hover{background:#000; border-color:#6B747C}
+.wa svg{flex:none; color:#25D366}
+.wa span{white-space:nowrap}
+@media (max-width:620px){
+  .wa{width:54px; padding:0; justify-content:center; border-radius:50%}
+  .wa span{display:none}
+}
+@media print{.wa{display:none}}
+
+/* ============================================================
    REVELAÇÃO AO SCROLL
    ============================================================ */
 .rv{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1)}
@@ -719,7 +747,7 @@ p{margin:0 0 1em}
         </div>
         <div class="info__it">
           <strong>WhatsApp</strong>
-          <a href="https://wa.me/351000000000" target="_blank" rel="noopener" data-i18n="i.wa">Enviar mensagem direta</a>
+          <a href="https://wa.me/351000000000" id="waContacto" target="_blank" rel="noopener" data-i18n="i.wa">Enviar mensagem direta</a>
         </div>
         <div class="info__it">
           <strong data-i18n="i.sede">Sede</strong>
@@ -794,6 +822,14 @@ p{margin:0 0 1em}
 </section>
 </main>
 
+<!-- ======================= WHATSAPP ======================= -->
+<a class="wa" id="wa" href="#" target="_blank" rel="noopener" data-i18n-aria="wa.aria" aria-label="Falar connosco no WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 6.988 2.896 9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.886-9.885 9.886m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.465 3.488"/>
+  </svg>
+  <span data-i18n="wa.label">Falar no WhatsApp</span>
+</a>
+
 <!-- ======================= FOOTER ======================= -->
 <footer class="ftr">
   <div class="wrap">
@@ -842,6 +878,11 @@ p{margin:0 0 1em}
 <script>
 (function(){
   "use strict";
+
+  /* ============================================================
+     CONFIGURAÇÃO — mudar aqui e em mais lado nenhum
+     ============================================================ */
+  var WHATSAPP = '351000000000';   // sem +, sem espaços, com indicativo do país
 
   /* ============================================================
      DICIONÁRIO — pt (base) · es · en
@@ -926,6 +967,9 @@ p{margin:0 0 1em}
     "f.err.envio":"O envio falhou. Escreva-nos para geral@confertec.pt ou ligue para +351 000 000 000.",
     "f.err.rede":"Sem ligação ao servidor. Escreva-nos para geral@confertec.pt ou ligue para +351 000 000 000.",
 
+    "wa.aria":"Falar connosco no WhatsApp","wa.label":"Falar no WhatsApp",
+    "wa.msg":"Olá! Gostaria de pedir um orçamento para uma obra.",
+
     "ftr.tag":"Estruturas de betão armado, estruturas metálicas e obra civil em Portugal.",
     "ftr.nav":"Navegação","ftr.livro":"Livro de Reclamações","ftr.priv":"Política de Privacidade","ftr.termos":"Termos"
   },
@@ -1007,6 +1051,9 @@ p{margin:0 0 1em}
     "f.ok":"Solicitud enviada. Respondemos en 24 horas laborables. Si es urgente, llame al +351 000 000 000.",
     "f.err.envio":"El envío ha fallado. Escríbanos a geral@confertec.pt o llame al +351 000 000 000.",
     "f.err.rede":"Sin conexión con el servidor. Escríbanos a geral@confertec.pt o llame al +351 000 000 000.",
+
+    "wa.aria":"Hablar con nosotros por WhatsApp","wa.label":"Hablar por WhatsApp",
+    "wa.msg":"¡Hola! Me gustaría pedir un presupuesto para una obra.",
 
     "ftr.tag":"Estructuras de hormigón armado, estructuras metálicas y obra civil en Portugal.",
     "ftr.nav":"Navegación","ftr.livro":"Libro de Reclamaciones","ftr.priv":"Política de Privacidad","ftr.termos":"Términos"
@@ -1090,6 +1137,9 @@ p{margin:0 0 1em}
     "f.err.envio":"Sending failed. Email geral@confertec.pt or call +351 000 000 000.",
     "f.err.rede":"No connection to the server. Email geral@confertec.pt or call +351 000 000 000.",
 
+    "wa.aria":"Message us on WhatsApp","wa.label":"Chat on WhatsApp",
+    "wa.msg":"Hello! I would like to request a quote for a project.",
+
     "ftr.tag":"Reinforced concrete structures, steel frames and civil works in Portugal.",
     "ftr.nav":"Navigation","ftr.livro":"Complaints Book","ftr.priv":"Privacy Policy","ftr.termos":"Terms"
   }
@@ -1161,6 +1211,13 @@ p{margin:0 0 1em}
     // idioma enviado com o formulário, para a equipa saber em que língua responder
     var campo = document.getElementById('campoIdioma');
     if (campo) campo.value = atual;
+
+    // links de WhatsApp com mensagem pré-preenchida no idioma ativo
+    var wUrl = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(d['wa.msg']);
+    ['wa','waContacto'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.setAttribute('href', wUrl);
+    });
 
     guardar(atual);
   }
@@ -1238,6 +1295,28 @@ p{margin:0 0 1em}
   } else {
     nums.forEach(contar);
   }
+
+  /* ---- botão flutuante de WhatsApp ----
+     Aparece depois do hero e desaparece quando o formulário está visível,
+     para não tapar o campo de mensagem nem duplicar a chamada à ação. */
+  var wa = document.getElementById('wa');
+  var secContacto = document.getElementById('contacto');
+  var formVisivel = false;
+
+  function estadoWa(){
+    var passouHero = window.scrollY > 480;
+    wa.setAttribute('data-show', String(passouHero && !formVisivel));
+  }
+
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(entradas){
+      formVisivel = entradas[0].isIntersecting;
+      estadoWa();
+    }, { threshold: .18 }).observe(secContacto);
+  }
+
+  estadoWa();
+  window.addEventListener('scroll', estadoWa, { passive:true });
 
   /* ---- formulário (Web3Forms — funciona em alojamento estático) ---- */
   var form = document.getElementById('form');
